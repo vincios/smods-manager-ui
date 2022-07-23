@@ -1,0 +1,20 @@
+// theming advanced guide: https://indepth.dev/tutorials/angular/angular-material-theming-system-complete-guide
+
+@use '@angular/material' as mat;
+@use './themes/theme-light-pink' as light;
+
+@use 'app/pages/mod/mod.component-theme' as mod-page;
+
+@include mat.core();
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme(light.$my-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+//@include mat.button-theme($my-theme);
+//@include mat.toolbar-theme($my-theme);
+
+@include mat.all-component-themes(light.$my-theme);
+@include mod-page.theme(light.$my-theme);
