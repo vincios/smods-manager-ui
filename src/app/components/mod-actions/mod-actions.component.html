@@ -1,0 +1,52 @@
+<div *ngIf="mod" class="mod-actions-box" [ngClass]="direction">
+  <div>
+    <mat-form-field class="revision-select" appearance="outline">
+      <mat-label>{{"COMPONENTS.MOD_ACTIONS.REVISIONS" | translate}}</mat-label>
+      <mat-select [disabled]="modStatus.installed !== null || modStatus.installing" [(value)]="selectedRevision" #selector>
+        <mat-option [value]="mod.latest_revision.id">
+          {{mod.latest_revision.name}} <app-simple-chip color="primary" size="small">latest</app-simple-chip>
+        </mat-option>
+        <mat-option *ngIf="modStatus.installed && !isInstalledRevisionInRevisionList()" [value]="modStatus.installed.id">
+          {{modStatus.installed.name}}
+        </mat-option>
+        <ng-container *ngIf="modTypeString(mod) === 'full' || loadedRevisions ; else elseBlock">
+          <mat-option  *ngFor="let revision of getOtherRevisions() | reverse" [value]="revision.id">
+            {{revision.name}}
+          </mat-option>
+        </ng-container>
+        <ng-template #elseBlock>
+          <mat-option class="spinner-container" (click)="loadMoreRevisions()">
+            <mat-spinner *ngIf="isLoadingRevisions" diameter="20"></mat-spinner>
+            <span *ngIf="!isLoadingRevisions">{{"COMMON.LOAD_MORE" | translate}}</span>
+          </mat-option>
+        </ng-template>
+      </mat-select>
+      <mat-hint *ngIf="modStatus.installed && !modStatus.installing">{{"COMPONENTS.MOD_ACTIONS.UNINSTALL_TO_INSTALL" | translate}}</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="actions-footer">
+    <span class="text-warn mat-small" *ngIf="taskError">{{taskError | uppercase | translate}}</span>
+    <div class="operations-list">
+      <app-mod-operations *ngFor="let op of operationsObjectsList" [op]="op"></app-mod-operations>
+    </div>
+    <div class="action-buttons">
+      <button disableRipple mat-icon-button (click)="toggleStar()" matTooltip="{{'COMPONENTS.MOD_ACTIONS.TOOLTIPS.STAR' | translate}}" matTooltipPosition="above">
+        <mat-icon *ngIf="!modStatus.starred" aria-hidden="false">star_border</mat-icon>
+        <mat-icon *ngIf="modStatus.starred" color="accent" aria-hidden="false">star</mat-icon>
+      </button>
+      <button mat-flat-button (click)="openPlaylistDialog()" matTooltip="{{'COMPONENTS.MOD_ACTIONS.TOOLTIPS.ADD_TO_PLAYLIST' | translate}}" matTooltipPosition="above">
+        <mat-icon color="accent">library_add</mat-icon>
+      </button>
+      <button mat-raised-button *ngIf="!manualDownloadUrl" class="spinner-container"
+              (click)="installUninstall()" [color]="modStatus.installed ? 'warn' : 'primary'" #errorTooltip="matTooltip"
+              [matTooltip]="!taskError ?  null : taskError | translate" matTooltipPosition="above">
+        <span *ngIf="!modStatus.installing && modStatus.installed">{{"COMPONENTS.MOD_ACTIONS.UNINSTALL" | translate | uppercase}}</span>
+        <mat-spinner color="accent" *ngIf="modStatus.installing" diameter="20"></mat-spinner>
+        <span *ngIf="!modStatus.installing && !modStatus.installed">{{"COMPONENTS.MOD_ACTIONS.INSTALL" | translate | uppercase}}</span>
+      </button>
+      <a mat-raised-button *ngIf="manualDownloadUrl" [color]="'warn'" [href]="manualDownloadUrl" target="_blank">
+        {{'COMMON.DOWNLOAD' | translate | uppercase}}
+      </a>
+    </div>
+  </div>
+</div>

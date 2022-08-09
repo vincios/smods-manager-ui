@@ -1,0 +1,82 @@
+<div class="container">
+
+<!--  <ng-template #dialogTitle>-->
+<!--    <h1 [ngClass]="{'mat-display-1': !isDialog}" [attr.mat-dialog-title]="isDialog">{{'PAGES.SETTINGS.TITLE' | translate }}</h1>-->
+<!--  </ng-template>-->
+
+  <!--   We define the page content in a template because if the page is rendered in a dialog we have to add some additional tags -->
+  <ng-template #dialogContent>
+    <mat-dialog-content>
+      <ng-container [ngTemplateOutlet]="pageContent"></ng-container>
+    </mat-dialog-content>
+  </ng-template>
+
+  <ng-template #pageContent>
+    <form [formGroup]="settingsFormGroup">
+      <ng-template #settingSection let-sectionName="name" let-sectionPath="path">
+        <div [formGroup]="getFormElement(sectionPath)">
+          <p class="{{'mat-h'+sectionPath.length}}"> <!-- We use the length of the section path to determine the dept of the section -->
+            {{ 'PAGES.SETTINGS.SECTION.' + sectionName | uppercase | translate }}
+          </p>
+
+          <div class="setting-line" *ngFor="let setting of getSectionSettings(sectionPath); let i = index; trackBy: trackByFn">
+            <!-- DEBUG LINE          <p>Setting of {{sectionName}}: {{setting | json}} </p>-->
+            <ng-container [ngSwitch]="setting.definition.type">
+              <mat-form-field *ngSwitchCase="'number'" appearance="outline">
+                <mat-label>{{'PAGES.SETTINGS.SETTING.' + setting.name | uppercase | translate}}</mat-label>
+                <input type="number" matInput [formControlName]="setting.name" [id]="setting.name">
+                <mat-error>{{'PAGES.SETTINGS.ERROR.REQUIRED_FIELD' | translate}}</mat-error>
+              </mat-form-field>
+              <mat-form-field *ngSwitchCase="'select'" appearance="outline">
+                <mat-label>{{'PAGES.SETTINGS.SETTING.' + setting.name | uppercase | translate}}</mat-label>
+                <!-- This app defines multiple cases for select settings -->
+                <app-style-select *ngIf="setting.definition.extra['styles']; else defaultSelect"
+                                  [styles]="setting.definition.extra['styles']" [formControlName]="setting.name" [id]="setting.name">
+                </app-style-select>
+                <ng-template #defaultSelect>
+                  <mat-select [formControlName]="setting.name" [id]="setting.name">
+                    <mat-option *ngFor="let choice of setting.definition.choices" [value]="choice.value">{{choice.text}}</mat-option>
+                  </mat-select>
+                </ng-template>
+                <mat-error>{{'PAGES.SETTINGS.ERROR.REQUIRED_FIELD' | translate}}</mat-error>
+              </mat-form-field>
+              <mat-slide-toggle *ngSwitchCase="'boolean'" class="setting-toggle" [formControlName]="setting.name" [id]="setting.name">
+                <mat-label>{{'PAGES.SETTINGS.SETTING.' + setting.name | uppercase | translate}}</mat-label>
+              </mat-slide-toggle>
+              <mat-form-field *ngSwitchDefault appearance="outline">
+                <mat-label>{{'PAGES.SETTINGS.SETTING.' + setting.name | uppercase | translate}}</mat-label>
+                <input type="text" matInput [formControlName]="setting.name" [id]="setting.name">
+                <mat-error>{{'PAGES.SETTINGS.ERROR.REQUIRED_FIELD' | translate}}</mat-error>
+              </mat-form-field>
+            </ng-container>
+          </div>
+
+          <div *ngFor="let childPath of getChildrenSectionPaths(sectionPath)">
+            <!-- DEBUG LINE         <p>Child of {{sectionName}}: {{childPath | json}}</p>-->
+            <ng-container [ngTemplateOutlet]="settingSection" [ngTemplateOutletContext]="{path: childPath, name: getSectionNameFromPath(childPath)}"></ng-container>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-container *ngFor="let sectionPath of getChildrenSectionPaths([])">
+        <ng-container [ngTemplateOutlet]="settingSection" [ngTemplateOutletContext]="{path: sectionPath, name: getSectionNameFromPath(sectionPath)}"></ng-container>
+      </ng-container>
+
+
+      <p>{{settingsFormGroup.value | json}}</p>
+      <p>Dirty={{settingsFormGroup.dirty | json}} Pristine={{settingsFormGroup.pristine | json}}</p>
+
+
+    </form>
+  </ng-template>
+
+  <!-- And here we define the conditional use of the of the templates -->
+  <h1 [ngClass]="{'mat-display-1': !isDialog}" [attr.mat-dialog-title]="isDialog ? true : null">{{'PAGES.SETTINGS.TITLE' | translate }}</h1>
+
+    <ng-container *ngIf="!isDialog" [ngTemplateOutlet]="pageContent"></ng-container>
+    <ng-container *ngIf="isDialog" [ngTemplateOutlet]="dialogContent"></ng-container>
+  <div class="settings-page-buttons" mat-dialog-actions align="end">
+    <button mat-button *ngIf="isDialog" mat-dialog-close="canceled">{{'COMMON.CLOSE' | translate}}</button>
+    <button [disabled]="!settingsFormGroup.dirty" mat-button color="accent" type="submit" (click)="savePreferences()">{{'COMMON.SAVE' | translate}}</button>
+  </div>
+</div>

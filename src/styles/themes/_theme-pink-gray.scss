@@ -1,0 +1,47 @@
+@use "sass:map";
+@use '@angular/material' as mat;
+@use "../../app-theme" as app;
+
+$default-typography-config: mat.define-typography-config();
+
+// NB: colors below need to align with the ones defined in StyleSelectComponent's scss 'themes' map
+$_pink-primary: mat.define-palette(mat.$pink-palette, 700, 500, 900);
+$_gray-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
+
+$theme-light: mat.define-light-theme((
+    color: (
+        primary: $_pink-primary,
+        accent: $_gray-accent,
+    ),
+    typography: $default-typography-config
+));
+
+$theme-dark: mat.define-dark-theme((
+    color: (
+        primary: $_pink-primary,
+        accent: $_gray-accent,
+    ),
+    typography: $default-typography-config
+));
+
+
+// we have commented this because, since pink-gray is our default theme set into the into the "styles.theme.scss" file,
+// we have no needs to add it again here (otherwise we would have duplicated code into the bundle) ...
+
+//.pink-gray {
+//    // Emit theme-dependent styles for common features used across multiple components.
+//    @include mat.core-color($theme-light);
+//    // Emit theme-dependent styles for all Angular Material components
+//    @include mat.all-component-colors($theme-light);
+//    // Emit theme-dependent styles for all custom components
+//    @include app.color($theme-light);
+//
+//    &.dark {
+//        // Emit theme-dependent styles for common features used across multiple components.
+//        @include mat.core-color($theme-dark);
+//        // Emit theme-dependent styles for all Angular Material components
+//        @include mat.all-component-colors($theme-dark);
+//        // Emit theme-dependent styles for all custom components
+//        @include app.color($theme-dark);
+//    }
+//}

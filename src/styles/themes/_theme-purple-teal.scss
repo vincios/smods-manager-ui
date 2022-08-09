@@ -1,0 +1,49 @@
+@use "sass:map";
+@use '@angular/material' as mat;
+@use "../../app-theme" as app;
+
+$default-typography-config: mat.define-typography-config();
+
+// NB: colors below need to align with the ones defined in StyleSelectComponent's scss 'themes' map
+$_purple-primary: mat.define-palette(mat.$purple-palette, 600, 400, 900);
+$_teal-accent: mat.define-palette(mat.$teal-palette, A700, 700, A400);
+$_orange-warn: mat.define-palette(mat.$orange-palette, 900, 700, A400);
+
+$theme-light: mat.define-light-theme((
+    color: (
+        primary: $_purple-primary,
+        accent: $_teal-accent,
+        warn: $_orange-warn
+    ),
+    typography: $default-typography-config
+));
+
+$theme-dark: mat.define-dark-theme((
+    color: (
+        primary: $_purple-primary,
+        accent: $_teal-accent,
+        warn: $_orange-warn
+    ),
+    typography: $default-typography-config
+));
+
+// This selector set the theme for the angular material components and for the components of the app, by including
+// their color mixins. Note the use of the -color mixin instead of the -theme mixin: this is because here we want set only
+// the theme's colors.
+.purple-teal {
+    // Emit theme-dependent styles for common features used across multiple components.
+    @include mat.core-color($theme-light);
+    // Emit theme-dependent styles for all Angular Material components
+    @include mat.all-component-colors($theme-light);
+    // Emit theme-dependent styles for all custom components
+    @include app.color($theme-light);
+
+    &.dark {
+        // Emit theme-dependent styles for common features used across multiple components.
+        @include mat.core-color($theme-dark);
+        // Emit theme-dependent styles for all Angular Material components
+        @include mat.all-component-colors($theme-dark);
+        // Emit theme-dependent styles for all custom components
+        @include app.color($theme-dark);
+    }
+}

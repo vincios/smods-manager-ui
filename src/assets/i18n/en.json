@@ -1,0 +1,79 @@
+{
+  "HELLO": "hello!!!",
+  "PAGES": {
+    "MOD": {
+      "MOD_REQUIREMENTS": "Requirements",
+      "DLC_REQUIREMENTS": "DLC requirements",
+      "MOD_REQUIREMENTS_DISCLAIMER": "You do not have to manually install these mods. They will be installed automatically when you install this mod"
+    },
+    "SETTINGS": {
+      "TITLE": "Settings",
+      "SECTION": {
+        "APP": "App",
+        "LOCAL": "Local",
+        "THEME": "Theme"
+      },
+      "SETTING": {
+        "CSINSTALLPATH": "Cities Skylines Installation Path",
+        "CSDATAPATH": "Cities Skylines Data Path",
+        "ISDARK": "Dark",
+        "LIGHTTHEME": "Light Theme",
+        "DARKTHEME": "Dark Theme",
+        "TYPOGRAPHY": "Typography",
+        "SYNCDARKTHEMEWITHOS": "Sync with os"
+      },
+      "ERROR": {
+        "REQUIRED_FIELD": "Required field"
+      },
+      "SETTINGS_SAVED": "Settings saved"
+    }
+  },
+  "COMPONENTS": {
+    "MOD_ACTIONS": {
+      "REVISIONS": "Revisions",
+      "UNINSTALL_TO_INSTALL": "Uninstall the revision to install another one",
+      "INSTALL": "Install",
+      "UNINSTALL": "Uninstall",
+      "TOOLTIPS": {
+        "STAR": "Save to favorites",
+        "ADD_TO_PLAYLIST": "Add to playlists"
+      },
+      "ERRORS": {
+        "NO_REVISION_SELECTED": "Please select a revision",
+        "REQUEST_ERROR": "Request error, see logs"
+      }
+    },
+    "MOD_OPERATIONS": {
+      "STATES": {
+        "GET_MOD_INFO": "Gathering information...",
+        "GET_DEPENDENCIES": "Generating dependency tree..",
+        "INSTALLING_DEPENDENCY": "Installing dependency: {{mod}}...",
+        "GET_DOWNLOAD_URL": "Generating download url...",
+        "WAIT_FOR_FILE": "Manual download required. Please click on the download button and place the downloaded zip into the folder {{path}}",
+        "DOWNLOADING": "Downloading...",
+        "UNZIP": "Unzipping...",
+        "COPYING": "Installing...",
+        "DONE": "Done!",
+        "REMOVE_FOLDER": "Removing folders...",
+        "REMOVE_DATABASE_ENTRY": "Updating database..."
+      },
+      "ERRORS": {
+        "NO_PATH_CONFIGURATION": "CS folders not configured. Please check your configuration",
+        "REVISION_NOT_FOUND": "Revision not found",
+        "MOD_ALREADY_INSTALLED": "Another revision is already installed. Please uninstall it before install",
+        "TIMEOUT": "Manual download waiting reached the timeout",
+        "HTTP_ERROR": "An http error happened, see the logs",
+        "ZIP_ERROR": "An error occurred during decompression",
+        "EXCEPTION": "An exception raised during the task, see the logs",
+        "MOD_NOT_FOUND": "Mod not found",
+        "MOD_NOT_INSTALLED": "Mod not installed"
+      }
+    }
+  },
+  "COMMON": {
+    "LOAD_MORE": "Load more...",
+    "DOWNLOAD": "Download",
+    "SAVE": "Save",
+    "CLOSE": "Close"
+  }
+}

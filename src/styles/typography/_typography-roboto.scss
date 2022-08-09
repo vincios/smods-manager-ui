@@ -1,0 +1,20 @@
+@use "sass:map";
+@use '@angular/material' as mat;
+@use "../../app-theme" as app;
+
+// NB: config below need to align with the one defined in StyleSelectComponent's scss 'typographies' map
+$typography-config: mat.define-typography-config(
+    $font-family:   'Roboto, "Helvetica Neue", sans-serif',
+);
+
+
+// we have commented this because, since pink-gray is our default theme set into the into the "styles.theme.scss" file,
+// we have no needs to add it again here (otherwise we would have duplicated code into the bundle) ...
+
+//.roboto {
+//    // Emit theme-dependent styles for all Angular Material components
+//    @include mat.all-component-typographies($typography-config);
+//    // Emit theme-dependent styles for all custom components
+//    @include app.color($typography-config);
+//}
+

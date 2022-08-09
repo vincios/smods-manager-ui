@@ -1,0 +1,61 @@
+.mod-actions-box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.mod-actions-box.horizontal {
+    flex-direction: row;
+    align-items: center;
+
+    .actions-footer {
+        margin-left: auto;
+    }
+}
+
+.mod-actions-box.vertical {
+    flex-direction: column;
+
+    .actions-footer {
+        margin-top: auto;
+    }
+}
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.revision-select {
+    width: 100%;
+}
+
+.action-buttons {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.action-buttons > :nth-child(1) {
+    flex: 1 1 auto;
+}
+
+
+.action-buttons > :nth-child(2) {
+    flex: 1 1 auto;
+}
+
+
+.action-buttons > :nth-child(3) {
+    flex: 1 1 50%;
+}
+
+
+.action-status {
+    padding-bottom: 12px;
+}
+
+.operations-list {
+  padding: 16px 8px;
+}

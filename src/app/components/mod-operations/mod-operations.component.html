@@ -1,0 +1,18 @@
+<div class="op-line">
+  <div class="op-text mat-small">
+    <ng-container *ngIf="op && op.state && op?.state !== 'error'" [ngSwitch]="op.state">
+      <span *ngSwitchCase="'installing_dependency'" [translate]="'COMPONENTS.MOD_OPERATIONS.STATES.INSTALLING_DEPENDENCY'" [translateParams]="{mod: op['mod']?.name}"></span>
+      <span *ngSwitchCase="'wait_for_file'" translate [translateParams]="{path: op['revision']['download_url']}">
+        <!--COMPONENTS.MOD_OPERATIONS.STATES.WAIT_FOR_FILE-->
+        {{'COMPONENTS.MOD_OPERATIONS.STATES.' + op?.state | uppercase }}
+      </span>
+      <span *ngSwitchDefault>
+        {{'COMPONENTS.MOD_OPERATIONS.STATES.' + op?.state | uppercase | translate}}
+      </span>
+    </ng-container>
+    <span *ngIf="op && op.state && op?.state === 'error'">{{'COMPONENTS.MOD_OPERATIONS.ERRORS.' + op['code'] | uppercase | translate}}</span>
+  </div>
+  <div class="op-progressbar">
+    <mat-progress-bar [mode]="progressbarPercentage < 0 ? 'indeterminate' : 'determinate'" [value]="progressbarPercentage"></mat-progress-bar>
+  </div>
+</div>

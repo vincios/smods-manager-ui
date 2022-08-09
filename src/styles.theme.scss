@@ -1,0 +1,40 @@
+// :::::::::::::::::::::::::::::::::::::::::::::::
+//
+// This file contains the default configuration for theming
+//
+//  Theming advanced guide: https://indepth.dev/tutorials/angular/angular-material-theming-system-complete-guide
+//  Themes files organization inspired by the official material.angular.io site (https://github.com/angular/material.angular.io)
+//
+// ::::::::::::::::::::::::::::::::::::::::::::::::
+@use '@angular/material' as mat;
+@use "app-theme" as app;
+@use "styles/themes/theme-pink-gray" as default-theme;
+
+// Include material core styles.
+@include mat.core();
+
+
+// We emits here the rules for the default theme, i.e. the pink-gray theme. If you want change the default theme:
+//      1. change the import above
+//      2. uncomment the selector lines of the current default theme (into its .scss file)
+//      3. comment the same lines into the new default theme .scss file
+//      4. change into the typescript code (in particular, into the ThemeService) all the references to the old theme as default theme
+
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme(default-theme.$theme-light);
+// Emit theme-dependent styles for all Angular Material components
+@include mat.all-component-themes(default-theme.$theme-light);
+// Emit theme-dependent styles for all custom components
+@include app.theme(default-theme.$theme-light);
+
+// For the dark settings we emit only the -color mixins, since the typography and density settings are
+// the same of the light theme that have been already emitted above for the light theme, with the -theme mixin
+.dark {
+    // Emit theme-dependent styles for common features used across multiple components.
+    @include mat.core-color(default-theme.$theme-dark);
+    // Emit theme-dependent styles for all Angular Material components
+    @include mat.all-component-colors(default-theme.$theme-dark);
+    // Emit theme-dependent styles for all custom components
+    @include app.color(default-theme.$theme-dark);
+}

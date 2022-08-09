@@ -1,3 +1,28 @@
 .container {
     padding: 10px;
 }
+
+.app-toolbar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.theme-picker {
+    .mat-menu-item {
+        .theme-example-icon {
+            margin-right: 0;
+            margin-left: 8px;
+            float: right;
+
+            svg {
+                vertical-align: middle;
+            }
+        }
+    }
+}

@@ -3,92 +3,258 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+
+    .card-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 20%;
+        padding: 12px;
+        flex: 1 1 auto;
+    }
+
+    .card-image img {
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
 }
 
-.card-image {
-    width: 20%;
+
+.card-content {
+    flex: 3 2 auto;
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+
+    .card-title {
+        margin-bottom: 12px;
+    }
+
+    .card-title h1,
+    .card-title h2,
+    .card-title h3,
+    .card-title h4,
+    .card-title h5,
+    .card-title h6, {
+        //font-size: 32px;
+        font-weight: 400;
+        margin-bottom: 0;
+        display: inline-block;
+    }
+
+    .mod-category {
+        padding-left: 12px;
+    }
+
+    .card-subtitle p {
+        font-size: 12px;
+    }
+
+    .card-metadata {
+        margin-top: 12px;
+    }
+
+
+    .metadata-row {
+        padding: 3px;
+    }
+
+    .links {
+        margin-top: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding-top: 12px;
+    }
+}
+
+.card-actions {
+    flex: 1 1 auto;
     padding: 12px;
 }
 
-.card-image img {
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+.mod-content {
+    display: flex;
+    flex-direction: row;
+    margin: 12px auto 0 auto;
+
+    .description-container {
+        flex: 2 1 auto;
+    }
+
+    .description-box {
+        max-width: 90%;
+        width: auto;
+        margin: 12px auto 0 auto;
+
+        p {
+            padding: 10px 5px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        div.bb_h1, .bb_wysiwyg h1 {
+            margin-bottom: 10px;
+            clear: both;
+        }
+
+        div.bb_h2 {
+            margin-bottom: 6px;
+            margin-top: 8px;
+            clear: both;
+        }
+
+        span.bb_link_host {
+            display: none;
+        }
+
+        //:not(li) img,
+        //:not(a) > img {
+        //    width: 75%;
+        //    position:relative;
+        //    left: 50%;
+        //    transform: translateX(-50%);
+        //}
+
+        :not(a):not(li) > img {
+            width: 75%;
+            position:relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        a[rel="noreferrer noopener"] {
+            position: relative;
+        }
+
+        a[rel="noreferrer noopener"]:hover {
+
+        }
+
+        a[rel="noreferrer noopener"]:before {
+            content: "launch";
+            font-family: "Material Icons", sans-serif;
+            font-size: 0.9em;
+            position: absolute;
+            right: 0;
+            text-decoration: none;
+        }
+
+        a[rel="noreferrer noopener"]:after {
+            content: '\00a0\00a0\00a0\00a0';
+        }
+
+        blockquote.bb_blockquote, .bb_wysiwyg blockquote {
+            border: 1px solid;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px;
+            display: table;
+        }
+    }
+
+    .requirements {
+        flex: 1 1 auto;
+    }
+
+    .requirements > div {
+        margin-bottom: 32px;
+    }
 }
 
-.card-content {
-    display: inline-block;
-    padding: 16px;
-}
 
-.card-title {
-    margin-bottom: 12px;
-}
 
-.card-title h2 {
-    font-size: 32px;
-    font-weight: 400;
-    margin-bottom: 0;
-    display: inline-block;
-    padding-right: 12px;
-}
-
-.card-subtitle p {
-    font-size: 12px;
-}
-
-.card-metadata {
-    margin-top: 12px;
-}
-
-.color-box {
-    border: 1px;
-    //color: whitesmoke;
-    padding: 4px;
-    border-radius: 3px;
-}
-
-.metadata-row {
-  padding: 3px;
-}
 
 .card.is-loading {
     .card-image,
     .card-title,
     .card-subtitle,
     .card-metadata {
-      background: #eee;
-      background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-      border-radius: 5px;
-      background-size: 200% 100%;
-      animation: 1.5s shine linear infinite;
+        background: #eee;
+        background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+        border-radius: 5px;
+        background-size: 200% 100%;
+        //animation: 1.5s shine linear infinite;
     }
-  
+
     .card-image {
-      width: 200px;
-      height: 150px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+        width: 200px;
+        height: 150px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
-  
+
     .card-title {
-      height: 30px;
-      width: 200px;
+        height: 30px;
+        width: 200px;
     }
-  
+
     .card-subtitle {
-      height: 18px;
-      width: 200px;
+        height: 18px;
+        width: 200px;
     }
 
     .card-metadata {
         height: 60px;
         width: 200px;
     }
-  }
-  
-  @keyframes shine {
-    to {
-      background-position-x: -200%;
+}
+
+@media only screen and (max-width: 700px) {
+    .card {
+        flex-direction: column;
+
+        .card-image {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            /* change the value as you prefer, even in px */
+            //margin: auto;
+            //text-align: center;
+            ///*demo*/
+            //border: 1px solid red;
+        }
+
+        .card-image img {
+            width: 75%;
+            //border: 1px solid transparent;
+            //display: inline-block;
+            //vertical-align: middle;
+        }
     }
-  }
+
+    .card.is-loading {
+        .card-image {
+            width: 97%;
+            height: 150px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .card-title {
+            height: 30px;
+            width: 100%;
+        }
+
+        .card-subtitle {
+            height: 18px;
+            width: 100%;
+        }
+
+        .card-metadata {
+            height: 60px;
+            width: 100%;
+        }
+    }
+
+    .mod-content {
+        flex-direction: column;
+        .description-box {
+            padding: 16px 32px;
+        }
+    }
+}

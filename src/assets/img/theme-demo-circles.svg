@@ -1,0 +1,19 @@
+<svg height="1080" viewBox="0 0 1920 1080" width="1920" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <ellipse
+            id="left"
+            cx="460"
+            cy="540"
+            rx="450"
+            ry="450" />
+        <ellipse
+            id="right"
+            cx="1470"
+            cy="540"
+            rx="450"
+            ry="450" />
+        </defs>
+    <use class="primary" fill="#fff" xlink:href="#left" />
+    <use class="accent" fill="#000" xlink:href="#right" />
+</svg>
+

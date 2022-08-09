@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use 'app/pages/mod/mod.component-theme' as mod-page;
+@use 'app/components/simple-chip/simple-chip.component-theme' as simple-chip-component;
+@use "app/app.component-theme" as app-component;
+@use "app/components/style-select/style-select.component-theme" as style-select-component;
+// ********************************************************************************************
+//
+// This file contains theming option that will be reusable in each part of the application
+//
+// ********************************************************************************************
+@mixin color($theme) {
+    // Get the color config from the theme.
+    $color-config: mat.get-color-config($theme);
+
+    // Get the primary color palette from the color-config.
+    $primary-palette: map.get($color-config, 'primary');
+    $warn-palette: map.get($color-config, 'warn');
+    $accent-palette: map.get($color-config, 'accent');
+    $foreground: map.get($color-config, foreground);
+
+    .text-warn { // All text that use this class will be colored of the theme warn color
+        color: mat.get-color-from-palette($warn-palette);
+    }
+
+
+    // here we set the theme for each custom component that needs theme styling
+    @include mod-page.color($theme);
+    @include simple-chip-component.color($theme);
+    @include app-component.color($theme);
+    @include style-select-component.color($theme)
+}
+
+@mixin typography($theme) {
+    // Get the typography config from the theme.
+    // A typography config is a collection of all typography levels, contains the styles for each level, keyed by name
+    // A typography level is a collection of typographic styles rules (font family, font weight, font size, ...) that can be applied to a text
+    // Angular provides preconfigured levels, listed here: https://material.angular.io/guide/typography#typography-levels
+    // but the user can define other levels
+    $typography-config: mat.get-typography-config($theme);
+
+    // here we set the topography for each custom component that needs theme styling
+    @include mod-page.typography($theme);
+    @include simple-chip-component.typography($theme);
+    @include app-component.typography($theme);
+    @include style-select-component.typography($theme)
+}
+
+@mixin theme($theme) {
+    $color-config: mat.get-color-config($theme);
+    @if $color-config != null {
+        @include color($theme);
+    }
+
+    $typography-config: mat.get-typography-config($theme);
+    @if $typography-config != null {
+        @include typography($theme);
+    }
+}

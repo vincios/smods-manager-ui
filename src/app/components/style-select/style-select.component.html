@@ -1,0 +1,16 @@
+<mat-select [formControl]="control">
+  <mat-select-trigger *ngIf="_selectedStyle">
+    <div class="style-select-option">
+      <mat-icon *ngIf="_selectedStyle.type === 'theme'" [class]="'theme-example-icon ' + _selectedStyle.className" svgIcon="theme-example-circles"></mat-icon>
+      <!--    <span class="spacer"></span>-->
+      <span [ngClass]="_selectedStyle.type === 'typography' ? _selectedStyle.className : ''">{{_selectedStyle.displayName}}</span>
+    </div>
+  </mat-select-trigger>
+  <mat-option *ngFor="let style of choices" [value]="style.className">
+    <div class="style-select-option">
+      <mat-icon *ngIf="style.type === 'theme'" [class]="'theme-example-icon ' + style.className" svgIcon="theme-example-circles"></mat-icon>
+      <!--    <span class="spacer"></span>-->
+      <span [ngClass]="style.type === 'typography' ? style.className : ''">{{style.displayName}}</span>
+    </div>
+  </mat-option>
+</mat-select>

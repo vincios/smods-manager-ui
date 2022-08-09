@@ -1,0 +1,13 @@
+.style-select-option {
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    mat-icon {
+        flex: 1 1 auto;
+        width: 18px;
+    }
+    span {
+        flex: 10 10 auto;
+    }
+}

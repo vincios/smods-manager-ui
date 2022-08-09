@@ -1,7 +1,9 @@
 export interface ModRevision {
+    id: string;
     name: string;
     date: Date;
-    download_url: String;
+    download_url: string;
+    filename: string;
 }
 
 
@@ -24,7 +26,7 @@ export interface FullMod extends ModBase {
     updated_date: Date;
     dlc_requirements: string[];
     mod_requirements: ModBase[];
-    revisions: ModRevision[];
+    other_revisions: ModRevision[];
     tags: string[];
     category: string;
     image_url: string;
@@ -39,4 +41,35 @@ export interface ModCatalogueItem extends ModBase {
     category: string;
     image_url: string;
     rating: number;
+}
+
+// APP models
+
+/**
+ * Models a state of an operation
+ */
+export interface TaskOperation {
+  op: "install" | "uninstall" | "update";
+  state: string;
+  [key: string]: any
+}
+
+/**
+ * Models info about Mod status into the app
+ */
+export interface ModStatus {
+    installed: ModRevision | null; // revision installed
+    downloaded: ModRevision[] | null;// revisions downloaded
+    starred: boolean;
+    playlists: {id: string; name: string}[]; // list of playlists where the mod is present
+    installing: boolean; // true during installation process
+    operation?:  TaskOperation // current progress operation
+}
+
+
+// Websocket Models
+export interface WebsocketMessage<T> {
+    type: string;
+    channel: string;
+    payload: T;
 }

@@ -28,8 +28,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/_theme.scss",
-              "src/styles.scss"
+              "src/styles.theme.scss",
+              "src/styles.scss",
+              {
+                "input": "src/styles/themes/_theme-purple-teal.scss",
+                "bundleName": "theme-purple-teal",
+                "inject": false
+              },
+              {
+                "input": "src/styles/typography/_typography-work-sans.scss",
+                "bundleName": "typography-work-sans",
+                "inject": false
+              }
             ],
             "scripts": []
           },
@@ -97,8 +107,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/_theme.scss",
-              "src/styles.scss"
+              "src/styles.theme.scss",
+              "src/styles.scss",
+              {
+                "input": "src/styles/themes/_theme-purple-teal.scss",
+                "bundleName": "theme-purple-teal",
+                "inject": false
+              },
+              {
+                "input": "src/styles/typography/_typography-work-sans.scss",
+                "bundleName": "typography-work-sans",
+                "inject": false
+              }
             ],
             "scripts": []
           }

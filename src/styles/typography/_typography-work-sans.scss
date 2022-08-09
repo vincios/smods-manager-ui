@@ -1,0 +1,17 @@
+@use "sass:map";
+@use '@angular/material' as mat;
+@use "../../app-theme" as app;
+
+// NB: config below need to align with the one defined in StyleSelectComponent's scss 'typographies' map
+$work-sans: "'Work Sans', sans-serif";
+$typography-config: mat.define-typography-config(
+    $font-family: $work-sans
+);
+
+
+.work-sans {
+    // Emit theme-dependent styles for all Angular Material components
+    @include mat.all-component-typographies($typography-config);
+    // Emit theme-dependent styles for all custom components
+    @include app.typography($typography-config);
+}
